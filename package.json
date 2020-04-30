@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "fuzzy-search": "^3.2.1",
+    "mongo": "^0.1.0",
+    "mongodb": "^3.5.7",
+    "now": "^18.0.0"
   }
 }
