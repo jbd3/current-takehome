@@ -1,5 +1,5 @@
 const { MongoClient, ObjectId } = require('mongodb');
-const FuzzySearch = require('fuzzy-search');
+require("string_score");
 
 async function connectToDatabase(uri) {
   try {
@@ -88,11 +88,7 @@ module.exports = async (req, res) => {
           });
         }
         const { arrivalObjects } = userVisits;
-        const searcher = new FuzzySearch(arrivalObjects, ['name'], {
-          caseSensitive: false,
-          sort: true, // sorted by best match
-        });
-        const results = searcher.search(searchString)
+        const results = arrivalObjects.filter(({ name }) => searchString.score(name, 1) > 0.5);
         const matchedArrivalObjects = results.map(({ userId, name, visitId }) => ({ userId, name, visitId }))
         return res.status(200).json(matchedArrivalObjects)
       } catch (err) {
