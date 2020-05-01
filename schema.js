@@ -50,7 +50,7 @@ const setupDb = async () => {
       $jsonSchema:
       {
         bsonType: "object",
-        required: ["userId", "name", "visitId"],
+        required: ["userId", "name"],
         properties:
         {
           _id: {},
@@ -61,10 +61,6 @@ const setupDb = async () => {
           name: {
             bsonType: ["string"],
             description: "valid location name string is required"
-          },
-          visitId: {
-            bsonType: ["string"],
-            description: "valid visitId is required"
           },
         }
       }
