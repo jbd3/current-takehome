@@ -74,7 +74,7 @@ module.exports = async (req, res) => {
           name: visit.name,
           visitId,
         }
-        res.status(200).json([arrivalObject])
+        return res.status(200).json([arrivalObject])
       } catch (err) {
         console.error('Error finding visit from visitId: ', err);
         return res.status(500).send();
@@ -97,12 +97,12 @@ module.exports = async (req, res) => {
       }
     } else {
       return res.status(404).send({
-        message: `Invalid request, please specify unique visitorId or userId and searchString`
+        message: `Invalid request, please specify unique visitId or userId and searchString`
       });
     }
   }
 
   return res.status(404).send({
-    message: 'Invalid request, please either POST a valid visit or GET visit info with valid query params'
+    message: 'Invalid request, please either POST a valid visit or GET visit info with valid visitId or userId and searchString'
   });
 }
